@@ -15,63 +15,55 @@ export const useAuthStore = defineStore('auth', () => {
     loading = ref(false),
 
     getUser = async () => {
-      console.log("User data requested");
-      // const { data } = await useFetch('/api/auth/user');
+      const { data } = await useFetch('/api/auth/user');
 
-      // console.log(
-      //   toRaw(data.value).user
-      // );
-      // user.value = toRaw(data.value).user;
+      user.value = toRaw(data.value).user;
     },
     login = async ({ phone, password }) => {
-      console.log("Login data submitted");
-      console.log({ phone, password });
+      loading.value = true;
 
-      // loading.value = true;
-      // const { data, error } = await useFetch('/api/auth/login', {
-      //   method: 'post',
-      //   body: { phone, password }
-      // });
+      const { data, error } = await useFetch('/api/auth/login', {
+        method: 'post',
+        body: { phone, password }
+      });
 
-      // if (error.value) errorMessage.value = toRaw(error.value).statusMessage;
+      if (error.value) errorMessage.value = toRaw(error.value).statusMessage;
 
-      // if (data.value && data.value.token) {
-      //   const token = useCookie('token');
-      //   token.value = data.value.token;
+      if (data.value && data.value.token) {
+        const token = useCookie('token');
+        token.value = data.value.token;
 
-      //   isLoggedIn.value = true;
+        isLoggedIn.value = true;
 
-      //   router.push("/provider");
-      // } else {
-      //   isLoggedIn.value = false;
-      // }
+        router.push("/provider");
+      } else {
+        isLoggedIn.value = false;
+      }
 
-      // loading.value = false;
+      loading.value = false;
     },
     register = async ({ name, phone, password }) => {
-      console.log("Registration data submitted");
-      console.log({ name, phone, password });
+      loading.value = true;
 
-      // loading.value = true;
-      // const { data, error } = await useFetch('/api/auth/register', {
-      //   method: 'post',
-      //   body: { name, phone, password }
-      // });
+      const { data, error } = await useFetch('/api/auth/register', {
+        method: 'post',
+        body: { name, phone, password }
+      });
 
-      // if (error.value) errorMessage.value = toRaw(error.value).statusMessage;
+      if (error.value) errorMessage.value = toRaw(error.value).statusMessage;
 
-      // if (data.value && data.value.token) {
-      //   const token = useCookie('token');
-      //   token.value = data.value.token;
+      if (data.value && data.value.token) {
+        const token = useCookie('token');
+        token.value = data.value.token;
 
-      //   isLoggedIn.value = true;
+        isLoggedIn.value = true;
 
-      //   router.push("/provider");
-      // } else {
-      //   isLoggedIn.value = false;
-      // }
+        router.push("/provider");
+      } else {
+        isLoggedIn.value = false;
+      }
 
-      // loading.value = false;
+      loading.value = false;
     },
     logout = () => {
       user.value = null;
