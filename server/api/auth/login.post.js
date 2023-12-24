@@ -21,7 +21,7 @@ export default defineEventHandler(async e => {
       statusMessage: "Incorrect password"
     });
 
-    const token = createToken(user.id);
+    const token = await createToken(user.id);
 
     return { token };
   } catch (err) {

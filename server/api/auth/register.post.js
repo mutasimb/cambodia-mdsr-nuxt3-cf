@@ -28,7 +28,7 @@ export default defineEventHandler(async e => {
         }
       }),
       
-      token = createToken(createdUser.id);
+      token = await createToken(createdUser.id);
 
     return { token };
   } catch (err) {

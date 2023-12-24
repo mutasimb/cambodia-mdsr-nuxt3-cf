@@ -45,7 +45,8 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
   runtimeConfig: {
-    secretJWT: process.env.JWT_SECRET
+    keyPrivate: process.env.PRIVATE_KEY,
+    keyPublic: process.env.PUBLIC_KEY
   },
   vite: {
     vue: {

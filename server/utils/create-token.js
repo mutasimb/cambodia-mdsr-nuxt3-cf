@@ -1,9 +1,14 @@
-import jsonwebtoken from "jsonwebtoken";
+import { createPrivateKey } from "crypto";
+import { V4 } from "paseto";
 
-const { secretJWT } = useRuntimeConfig();
+const { keyPrivate } = useRuntimeConfig();
 
-export default id => jsonwebtoken.sign(
+export default id => V4.sign(
   { id },
-  secretJWT,
+  createPrivateKey({
+    key: Buffer.from(keyPrivate, "hex"),
+    type: 'pkcs8',
+    format: 'der'
+  }),
   { expiresIn: "365 days" }
 );
